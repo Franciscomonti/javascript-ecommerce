@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/estilos.css">
+
+    <title>e-commerce</title>
+</head>
+
+<body>
+    <header>
+        <nav class="Nav-Bar">
+            <div class="Nav-Bar-Saludo"></div>
+            <div class="Nav-Bar-Titulo">
+                <h2>E-Commerce</h2>
+            </div>
+            <ul class="Nav-Bar-Bloque">
+                <li class="Nav-Bar-Bloque-Carrito" id="btn-modal-cart"><img src="./img/icon/cart vacio.svg" alt="">
+                    <span id="contador-Cart">(0)</span></li>
+                <li class="Nav-Bar-Bloque-Favoritos" id="btn-modal-fav"><img src="./img/icon/fav.svg " alt=""> <span
+                        id="contador-Fav">(0)</span></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <main class="Banner">
+        <div class="Banner-descript">
+            <h2>/ Producto</h2>
+            <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum ratione repudiandae, dicta in
+                consequatur facere ea veritatis nam enim nihil laudantium nesciunt architecto totam pariatur, repellat
+                deserunt perspiciatis praesentium quidem!</h3>
+            <div class="Banner-Btn-Comprar">
+                <h4>Comprar <span>$5000</span></h4>
+            </div>
+        </div>
+        <div class="Banner-img">
+            <img src="./img/nikeportada2.png" alt="imagen prod portada">
+        </div>
+    </main>
+
+
+    <section class="Productos">
+
+        <div class="Productos-Filtro">
+
+            <h2 class="Productos-Filtro-Titulo">Filtros<img src="./img/icon/filtro.svg" alt=""></h2>
+
+            <div class="Productos-Filtro-Cat">
+                <h2 class="Productos-Filtro-Subtit">Clase</h2>
+                <ul class="Productos-Filtro-Lista">
+                    <li class="filtro" onclick="filtroTodos(this)">Todos</li>
+                    <li class="filtro" onclick="filtroPorTipo(this, 'remera')">Remera</li>
+                    <li class="filtro" onclick="filtroPorTipo(this, 'pantalon')">Pantalon</li>
+                    <li class="filtro" onclick="filtroPorTipo(this, 'buzo')">Buzo</li>
+                    <li class="filtro" onclick="filtroPorTipo(this, 'calzado')">Calzado</li>
+                </ul>
+            </div>
+
+            <div class="Productos-Filtro-Cat">
+                <h2 class="Productos-Filtro-Subtit">Precio</h2>
+                <ul class="Productos-Filtro-Lista">
+                    <li class="filtro" onclick="filtroCostoMayor(this)">Mayor a menor</li>
+                    <li class="filtro" onclick="filtroCostoMenor(this)">Menor a mayor</li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="Productos-main" id="Productos-main"></div>
+
+
+    </section>
+
+    <!-- PRUEBA -->
+    <section class="modal" id="modalFav" style="display: none;">
+        <div class="modal-externo">
+            <div>
+                <h2 class="modal-cerrar">X</h2>
+            </div>
+            <div class="modal-contenedor" id="modal-contenedor"></div>
+        </div>
+    </section>
+
+    <section class="modal" id="modalCarrito" style="display: none;">
+        <div class="modal-externo">
+            <div>
+                <h2 class="modal-cerrar2">X</h2>
+            </div>
+            <div class=" modal-contenedor productos-fav" id="carrito"></div>
+        </div>
+    </section>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="./javascript/main.js"></script>
+</body>
+
+</html>
