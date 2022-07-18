@@ -54,6 +54,15 @@ function crearCardsMain(productos) {
 function crearCard(producto) {
 
     let iconFav = includesFav(favoritos, producto) ? "fav black.svg" : "fav.svg";
+    
+    function includesFav(lista, producto) {
+        for (const fav of lista) {
+            if (fav.id == producto.id) {
+                return true
+            }
+        }
+        return false
+    }
 
     let cardCreada = `
         <div class="Productos-main-Card">
@@ -151,15 +160,6 @@ function contadorCarrito() {
 //---------------------------------------------------FAVORITOS-------------------------------------------------
 
 let favoritos = []
-
-function includesFav(lista, producto) {
-    for (const fav of lista) {
-        if (fav.id == producto.id) {
-            return true
-        }
-    }
-    return false
-}
 
 function manejarFavs(id) {
     estaEnFav(id) ? eliminarFavorito(id) : agregarFavorito(id)
