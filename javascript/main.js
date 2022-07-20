@@ -77,7 +77,6 @@ function alertToast(leyenda, color) {
     }).showToast();
 }
 
-
 //-----------------------------------------------------MAIN---------------------------------------------------
 
 function crearCardsMain(productos) {
@@ -92,16 +91,7 @@ function crearCardsMain(productos) {
 
 function crearCard(producto) {
 
-    let iconFav = includesFav(favoritos, producto) ? "fav black.svg" : "fav.svg";
-
-    function includesFav(lista, producto) {
-        for (const fav of lista) {
-            if (fav.id == producto.id) {
-                return true
-            }
-        }
-        return false
-    }
+    let iconFav = estaEnFav(producto.id) ? "fav black.svg" : "fav.svg";
 
     let cardCreada = `
         <div class="Productos-main-Card">
@@ -123,8 +113,6 @@ function crearCard(producto) {
         `;
     return cardCreada
 }
-
-
 
 
 //----------------------------------------------------CARRITO--------------------------------------------------
@@ -192,8 +180,7 @@ function crearCardCarrito(producto) {
             
             <div class="modal-card-accion">
                 <h2 class="btn-agregar">Comprar</h2>
-                <h2 id="${producto.id}" class="btn-eliminar"
-            onclick="eliminarCarrito(${producto.id})">Eliminar de carrito</h2>
+                <h2 class="btn-eliminar" onclick="eliminarCarrito(${producto.id})">Eliminar de carrito</h2>
             </div>
         </div>
     </div>
@@ -215,12 +202,8 @@ function manejarFavs(id) {
 }
 
 function estaEnFav(id) {
-    for (let prod of favoritos) {
-        if (prod.id == id) {
-            return true
-        }
-    }
-    return false
+    let encontrar = favoritos.find(prod => prod.id == id)
+    return encontrar != undefined
 }
 
 function agregarFavorito(id) {
@@ -271,8 +254,7 @@ function crearCardFav(producto) {
             </div>
                 <div class="modal-card-accion">
                     <h2 class="btn-agregar" onclick="agregarCarrito(${producto.id})">Agregar al Carrito</h2>
-                    <h2 id="${producto.id}" class="btn-eliminar"
-                    onclick="eliminarFavorito(${producto.id})">Eliminar</h2>
+                    <h2 class="btn-eliminar" onclick="eliminarFavorito(${producto.id})">Eliminar</h2>
                 </div>
             </div>
         </div>
@@ -378,9 +360,9 @@ function removerProductoLocalStorage(arrayStorage) {
 
 //Favaritos
 
-function traerProductosLocalStorage() {
-    let storeList = localStorage.getItem("localFavoritos")
-    storeList == null ? localFavoritos = [] : favoritos = JSON.parse(storeList)
+function traerProductosLocalStorage(key) {
+    let storeList = localStorage.getItem(key)
+    return storeList == null ? [] : JSON.parse(storeList)
 }
 
 function pintarFavoritos() {
@@ -393,7 +375,7 @@ function pintarFavoritos() {
 
 function traerProductosLocalStorageCarrito() {
     let storeListcarrito = localStorage.getItem("localCarrito")
-    storeListcarrito == null ? localCarrito = [] : carrito = JSON.parse(storeListcarrito)
+    carrito = storeListcarrito == null ? [] : JSON.parse(storeListcarrito)
 }
 
 function pintarCarrito() {
@@ -403,11 +385,11 @@ function pintarCarrito() {
 }
 
 function inciarLocalStorage() {
-    traerProductosLocalStorage()
+    favoritos = traerProductosLocalStorage("localFavoritos")
     contadorFavoritos()
     pintarFavoritos()
 
-    traerProductosLocalStorageCarrito()
+    carrito = traerProductosLocalStorage("localCarrito")
     contadorCarrito()
     pintarCarrito()
 }
