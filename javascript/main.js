@@ -358,12 +358,13 @@ function removerProductoLocalStorage(arrayStorage) {
     localStorage.removeItem(arrayStorage)
 }
 
-//Favaritos
-
 function traerProductosLocalStorage(key) {
     let storeList = localStorage.getItem(key)
     return storeList == null ? [] : JSON.parse(storeList)
 }
+
+//Favaritos
+
 
 function pintarFavoritos() {
     let cardFav = document.querySelector("#modal-contenedor");
@@ -372,11 +373,6 @@ function pintarFavoritos() {
 }
 
 //Carrito
-
-function traerProductosLocalStorageCarrito() {
-    let storeListcarrito = localStorage.getItem("localCarrito")
-    carrito = storeListcarrito == null ? [] : JSON.parse(storeListcarrito)
-}
 
 function pintarCarrito() {
     let cardCar = document.querySelector("#carrito");
