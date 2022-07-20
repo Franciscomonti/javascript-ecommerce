@@ -39,6 +39,45 @@ listaProductos.push(prod10);
 listaProductos.push(prod11);
 listaProductos.push(prod12);
 
+//---------------------------------- ALERTAS----------------------------------
+
+function alertSeEncuentraCarrito(id) {
+    Swal.fire({
+        icon: 'info',
+        title: 'El producto seleccionado ya se encuentra en el Carrito',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Ir al Carrito',
+        denyButtonText: `Quitar del Carrito`,
+        background: "white",
+        color: "black",
+        confirmButtonColor: "blue",
+        denyButtonColor: "red",
+        cancelButtonColor: "black"
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            modalCarrito.style.display = "flex"
+        } else if (result.isDenied) {
+            eliminarCarrito(id)
+        }
+    })
+}
+
+function alertToast(leyenda, color) {
+    Toastify({
+        text: leyenda,
+        duration: 2500,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+            background: color,
+        },
+    }).showToast();
+}
+
+
 //-----------------------------------------------------MAIN---------------------------------------------------
 
 function crearCardsMain(productos) {
@@ -54,7 +93,7 @@ function crearCardsMain(productos) {
 function crearCard(producto) {
 
     let iconFav = includesFav(favoritos, producto) ? "fav black.svg" : "fav.svg";
-    
+
     function includesFav(lista, producto) {
         for (const fav of lista) {
             if (fav.id == producto.id) {
@@ -85,13 +124,17 @@ function crearCard(producto) {
     return cardCreada
 }
 
+
+
+
 //----------------------------------------------------CARRITO--------------------------------------------------
 
 let carrito = []
 
 function manejarCarrito(id) {
-    estaEnCarrito(id) ? eliminarCarrito(id) : agregarCarrito(id)
+    estaEnCarrito(id) ? alertSeEncuentraCarrito(id) : agregarCarrito(id)
 }
+
 
 function estaEnCarrito(id) {
     for (let prod of carrito) {
@@ -102,6 +145,7 @@ function estaEnCarrito(id) {
     return false
 }
 
+
 function agregarCarrito(id) {
     let productoSelecFav = listaProductos.find(producto => producto.id == id)
     carrito.push(productoSelecFav)
@@ -110,6 +154,8 @@ function agregarCarrito(id) {
     cardCar.innerHTML += crearCardCarrito(productoSelecFav);
 
     almacenarProductosLocalStorage("localCarrito", carrito)
+
+    alertToast("Producto agregado Correctamente", "black")
 
     contadorCarrito()
 
@@ -126,6 +172,8 @@ function eliminarCarrito(id) {
 
     almacenarProductosLocalStorage("localCarrito", carrito)
 
+    alertToast("Producto eliminado correctamente", "red")
+
     contadorCarrito()
 }
 
@@ -141,10 +189,11 @@ function crearCardCarrito(producto) {
                 <h4>${producto.codigo}</h4>
                 <h3>$ ${producto.precio}</h3>
             </div>
+            
             <div class="modal-card-accion">
-                <img src="./img/icon/trash.svg" alt="" id="${producto.id}" class="trash"
-            onclick="eliminarCarrito(${producto.id})">
-                <h2>Comprar</h2>
+                <h2 class="btn-agregar">Comprar</h2>
+                <h2 id="${producto.id}" class="btn-eliminar"
+            onclick="eliminarCarrito(${producto.id})">Eliminar de carrito</h2>
             </div>
         </div>
     </div>
@@ -184,6 +233,9 @@ function agregarFavorito(id) {
     cardFav.innerHTML += crearCardFav(productoSelecFav);
 
     almacenarProductosLocalStorage("localFavoritos", favoritos)
+
+    alertToast("Producto agregado a Favoritos", "black")
+
     contadorFavoritos()
 }
 
@@ -199,6 +251,9 @@ function eliminarFavorito(id) {
 
     removerProductoLocalStorage("localFavoritos")
     almacenarProductosLocalStorage("localFavoritos", favoritos)
+
+    alertToast("Producto quitado de Favoritos", "red")
+
     contadorFavoritos()
 }
 
@@ -215,9 +270,9 @@ function crearCardFav(producto) {
                 <h3>$ ${producto.precio}</h3>
             </div>
                 <div class="modal-card-accion">
-                <img src="./img/icon/trash.svg" alt="" id="${producto.id}" class="trash"
-                    onclick="eliminarFavorito(${producto.id})">
-                    <h2>Comprar</h2>
+                    <h2 class="btn-agregar" onclick="agregarCarrito(${producto.id})">Agregar al Carrito</h2>
+                    <h2 id="${producto.id}" class="btn-eliminar"
+                    onclick="eliminarFavorito(${producto.id})">Eliminar</h2>
                 </div>
             </div>
         </div>
@@ -356,6 +411,8 @@ function inciarLocalStorage() {
     contadorCarrito()
     pintarCarrito()
 }
+
+
 
 //----------------------------- MAIN-Inicializar-------------------------------
 

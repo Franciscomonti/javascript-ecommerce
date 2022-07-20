@@ -410,13 +410,13 @@ body .modal .modal-externo .modal-contenedor .modal-card {
 }
 
 body .modal .modal-externo .modal-contenedor .modal-card .modal-img {
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
 }
 
 body .modal .modal-externo .modal-contenedor .modal-card .modal-img img {
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   -o-object-fit: contain;
      object-fit: contain;
 }
@@ -430,6 +430,9 @@ body .modal .modal-externo .modal-contenedor .modal-card .desc-producto {
           justify-content: space-between;
   margin-left: 50px;
   width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .modal-card-desc {
@@ -472,20 +475,24 @@ body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .modal-c
           flex-direction: column;
   -ms-flex-pack: distribute;
       justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
-body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .modal-card-accion img {
-  width: 30px;
+body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .modal-card-accion .btn-eliminar {
+  color: red;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 3px 10px;
+  cursor: pointer;
 }
 
-body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .modal-card-accion h2 {
+body .modal .modal-externo .modal-contenedor .modal-card .desc-producto .modal-card-accion .btn-agregar {
   font-size: 18px;
   font-weight: 400;
-  margin: 0px;
-  border: 1px solid black;
   padding: 3px 10px;
+  color: blue;
+  cursor: pointer;
 }
 /*# sourceMappingURL=estilos.css.map */
